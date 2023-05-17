@@ -1,5 +1,6 @@
 from PIL import Image
 import os
+from log import log
 
 def crop_images(query, input_folder, output_folder, width, height):
     input_folder = input_folder + "/" + query
@@ -36,3 +37,6 @@ def crop_images(query, input_folder, output_folder, width, height):
 
         # Save the cropped image
         cropped_image.save(output_path)
+
+        msg_log = output_path + " is now cropped"
+        log(msg_log)
