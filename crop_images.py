@@ -1,7 +1,7 @@
 from PIL import Image
 import os
 
-def resize_images(query, input_folder, output_folder, width, height):
+def crop_images(query, input_folder, output_folder, width, height):
     input_folder = input_folder + "/" + query
     output_folder = output_folder + "/" + query
 
@@ -19,13 +19,20 @@ def resize_images(query, input_folder, output_folder, width, height):
         # Open the image using PIL
         image = Image.open(input_path)
 
-        # Resize the image
-        resized_image = image.resize((width, height))
+        # Get the current dimensions of the image
+        current_width, current_height = image.size
+
+        # Calculate the center coordinates for cropping
+        left = (current_width - width) / 2
+        top = (current_height - height) / 2
+        right = (current_width + width) / 2
+        bottom = (current_height + height) / 2
+
+        # Crop the image
+        cropped_image = image.crop((left, top, right, bottom))
 
         # Construct the full path to the output file
         output_path = os.path.join(output_folder, file_name)
 
-        # Save the resized image
-        resized_image.save(output_path)
-
-        print(f"Resized {file_name} and saved to {output_path}")
+        # Save the cropped image
+        cropped_image.save(output_path)
