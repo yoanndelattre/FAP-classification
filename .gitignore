@@ -1,2 +1,3 @@
-output_original/
+output_browser/
+output_resize/
 __pycache__

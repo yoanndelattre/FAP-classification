@@ -1,13 +1,16 @@
 import sys
-import os
+import resize_images
 sys.path.append('source')
 import bing_image
 
 query = sys.argv[1]
 limit = 5
-output_dir = "output_original"
+output_browser = "output_browser"
 
-if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+output_resize = "output_resize"
+img_width = 512
+img_height = 512
 
-bing_image.download(query, limit, output_dir)
+bing_image.download(query, limit, output_browser)
+
+resize_images.resize_images(query, output_browser, output_resize, img_width, img_height)
