@@ -6,21 +6,27 @@ sys.path.append('source')
 import bing_image
 import instagram_suggestion
 
+env_execute = os.environ.get('ENV_EXECUTE')
+
 query = os.environ.get('QUERY_SEARCH')
 
 output_original = "output_original"
 
-limit_browser = 10
-limit_instagram = 5
+if env_execute == "PROD":
+    limit_browser = 100
+    limit_instagram = 10
+else:
+    limit_browser = 5
+    limit_instagram = 2
 
 output_resize = "output_resize"
 img_width = 1024
 img_height = 1024
 
 if query is not None:
-    log("query ->")
-    log(query)
-    #bing_image.download(query, limit_browser, output_original)
+    log("-----Download Bing Image-----")
+    bing_image.download(query, limit_browser, output_original)
+    log("-----Download Instagram Suggestion-----")
     instagram_suggestion.download(query, limit_instagram, output_original)
     crop_images.crop_images(query, output_original, output_resize, img_width, img_height)
 else:
