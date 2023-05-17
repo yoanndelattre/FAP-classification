@@ -11,6 +11,6 @@ def download(query, limit, output_dir):
         output_dir=output_dir,
         adult_filter_off=True,
         force_replace=False,
-        timeout=60,
+        timeout=30,
         verbose=True
     )
