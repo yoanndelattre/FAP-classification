@@ -1,3 +1,4 @@
 output_original/
 output_resize/
+tmp/
 __pycache__
