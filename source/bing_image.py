@@ -2,9 +2,6 @@ from bing_image_downloader import downloader
 import os
 
 def download(query, limit, output_dir):
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-
     downloader.download(
         query,
         limit=limit,
