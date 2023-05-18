@@ -1,4 +1,4 @@
-output_original/
+output_download/
 output_resize/
 *tmp*
 __pycache__
