@@ -1,21 +1,22 @@
 from PIL import Image
 import os
 from log import log
+import shutil
 
 def crop_images(query, input_folder, output_folder, width, height):
-    input_folder = os.path.join(input_folder, query)
-    output_folder = os.path.join(output_folder, query)
+    input_subfolder = os.path.join(input_folder, query)
+    output_subfolder = os.path.join(output_folder, query)
 
     # Create the output folder if it doesn't exist
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
+    if not os.path.exists(output_subfolder):
+        os.makedirs(output_subfolder)
 
     # Get the list of files in the input folder
-    files = os.listdir(input_folder)
+    files = os.listdir(input_subfolder)
 
     for file_name in files:
         # Construct the full path to the input file
-        input_path = os.path.join(input_folder, file_name)
+        input_path = os.path.join(input_subfolder, file_name)
 
         # Open the image using PIL
         image = Image.open(input_path)
@@ -33,7 +34,7 @@ def crop_images(query, input_folder, output_folder, width, height):
         cropped_image = image.crop((left, top, right, bottom))
 
         # Construct the full path to the output file
-        output_path = os.path.join(output_folder, file_name)
+        output_path = os.path.join(output_subfolder, file_name)
 
         # Save the cropped image
         cropped_image.save(output_path)
