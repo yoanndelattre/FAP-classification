@@ -3,7 +3,7 @@ import os
 import crop_images
 import extract
 from log import log
-sys.path.append('source')
+sys.path.append('downloaders')
 import bing_image
 
 env_execute = os.environ.get('ENV_EXECUTE')
