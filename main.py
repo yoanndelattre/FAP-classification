@@ -1,7 +1,7 @@
 import sys
 import os
 import crop_images
-import move_and_delete_folder
+import extract
 from log import log
 sys.path.append('source')
 import bing_image
@@ -26,7 +26,8 @@ img_height = 1024
 if query is not None:
     log("-----Download Bing Image-----")
     bing_image.download(query, limit_browser, bing_tmp_folder)
-    move_and_delete_folder.move_and_delete_folder(bing_tmp_folder, output_original, query, "bing")
+    extract.rename_tmpfiles(bing_tmp_folder, query, "bing")
+    extract.move_and_delete_tmp_folder(bing_tmp_folder, output_original, query)
     crop_images.crop_images(query, output_original, output_resize, img_width, img_height)
 else:
     log("query is not set.")
