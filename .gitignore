@@ -3,3 +3,4 @@ output_resize/
 *tmp*
 __pycache__
 .env
+*chromedriver
