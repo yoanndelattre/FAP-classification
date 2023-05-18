@@ -3,8 +3,8 @@ import os
 from log import log
 
 def crop_images(query, input_folder, output_folder, width, height):
-    input_folder = input_folder + "/" + query
-    output_folder = output_folder + "/" + query
+    input_folder = os.path.join(input_folder, query)
+    output_folder = os.path.join(output_folder, query)
 
     # Create the output folder if it doesn't exist
     if not os.path.exists(output_folder):
