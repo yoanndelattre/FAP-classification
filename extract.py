@@ -1,5 +1,6 @@
 import os
 import shutil
+from log import log
 
 def rename_tmpfiles(source_folder, query, source_type):
     source_subfolder = os.path.join(source_folder, query)
@@ -18,6 +19,9 @@ def rename_tmpfiles(source_folder, query, source_type):
         os.rename(source_path, destination_path)
 
         count += 1
+        msg_log = destination_path + " is now renamed"
+        log(msg_log)
+
 
 def move_and_delete_tmp_folder(source_folder, destination_folder, query):
     # Create the destination folder if it doesn't exist
@@ -29,3 +33,5 @@ def move_and_delete_tmp_folder(source_folder, destination_folder, query):
 
     # Delete the source folder
     os.rmdir(source_folder)
+    msg_log = "Data has been moved -> " + destination_folder
+    log(msg_log)
