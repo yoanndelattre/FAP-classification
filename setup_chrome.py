@@ -4,7 +4,7 @@ import zipfile
 import os
 from log import log
 
-def get():
+def chromedriver():
     webdriver_path = './chromedriver'
 
     if not os.path.exists(webdriver_path):

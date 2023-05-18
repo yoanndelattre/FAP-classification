@@ -2,7 +2,7 @@ import sys
 import os
 import crop_images
 import extract
-import download_chromedriver
+import setup_chrome
 from log import log
 sys.path.append('downloaders')
 import bing_search
@@ -29,7 +29,7 @@ img_width = 1024
 img_height = 1024
 
 if query is not None:
-    download_chromedriver.get()
+    setup_chrome.chromedriver()
     log("-----Download Bing Image-----")
     bing_search.download(query, limit_browser, bing_tmp_folder)
     extract.rename_tmpfiles(bing_tmp_folder, query, "bing")

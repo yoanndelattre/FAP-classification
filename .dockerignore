@@ -1,0 +1,5 @@
+output_download/
+output_resize/
+*tmp*
+__pycache__
+*chromedriver
