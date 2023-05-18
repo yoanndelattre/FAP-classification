@@ -4,7 +4,7 @@ import crop_images
 import extract
 from log import log
 sys.path.append('downloaders')
-import bing_image
+import bing_search
 
 env_execute = os.environ.get('ENV_EXECUTE')
 
@@ -25,7 +25,7 @@ img_height = 1024
 
 if query is not None:
     log("-----Download Bing Image-----")
-    bing_image.download(query, limit_browser, bing_tmp_folder)
+    bing_search.download(query, limit_browser, bing_tmp_folder)
     extract.rename_tmpfiles(bing_tmp_folder, query, "bing")
     extract.move_and_delete_tmp_folder(bing_tmp_folder, output_original, query)
     crop_images.crop_images(query, output_original, output_resize, img_width, img_height)
