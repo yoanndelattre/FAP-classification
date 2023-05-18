@@ -41,3 +41,8 @@ def crop_images(query, input_folder, output_folder, width, height):
 
         msg_log = output_path + " is now cropped"
         log(msg_log)
+
+    # Delete the source folder
+    shutil.rmtree(input_folder)
+    msg_log = "Data has been moved -> " + output_folder
+    log(msg_log)
