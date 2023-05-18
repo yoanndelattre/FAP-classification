@@ -3,8 +3,8 @@ import shutil
 from log import log
 
 def rename_tmpfiles(source_folder, query, source_type):
-    source_subfolder = os.path.join(source_folder, query)
-    files = os.listdir(source_subfolder)
+    source_folder = os.path.join(source_folder, query)
+    files = os.listdir(source_folder)
     count = 1
     for file_name in files:
         file_extension = os.path.splitext(file_name)[1]
@@ -12,8 +12,8 @@ def rename_tmpfiles(source_folder, query, source_type):
         new_file_name = source_type + "_" + str(count) + file_extension
 
         # Get the full paths of the source and destination files
-        source_path = os.path.join(source_subfolder, file_name)
-        destination_path = os.path.join(source_subfolder, new_file_name)
+        source_path = os.path.join(source_folder, file_name)
+        destination_path = os.path.join(source_folder, new_file_name)
 
         # Rename the file
         os.rename(source_path, destination_path)
