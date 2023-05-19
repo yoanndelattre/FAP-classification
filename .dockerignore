@@ -2,3 +2,7 @@ output_download/
 output_resize/
 *tmp*
 __pycache__
+README.md
+LICENSE
+.gitignore
+Dockerfile
