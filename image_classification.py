@@ -2,7 +2,7 @@ import tensorflow as tf
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-def classification(train_dir, image_height, image_width, name_model_file):
+def classification(train_dir, image_height, image_width, name_model_file, new_name_model_file):
     # Chargez le modèle existant en format .h5
     model = load_model(name_model_file)
 
@@ -32,4 +32,4 @@ def classification(train_dir, image_height, image_width, name_model_file):
         epochs=epochs)
 
     # Enregistrer le modèle entraîné
-    model.save(name_model_file)
+    model.save(new_name_model_file)

@@ -12,6 +12,7 @@ env_execute = os.environ.get('ENV_EXECUTE')
 query = os.environ.get('QUERY_SEARCH')
 
 name_model_file = "fap_model.h5"
+new_name_model_file = "new_fap_model.h5"
 
 output_download_folder = "output_download"
 
@@ -36,6 +37,6 @@ if query is not None:
     crop_images.crop_images(query, output_download_folder, output_resize_folder, img_width, img_height)
 
     log("-----Start image classification-----")
-    image_classification.classification(output_resize_folder, img_height, img_width, name_model_file)
+    image_classification.classification(output_resize_folder, img_height, img_width, name_model_file, new_name_model_file)
 else:
     log("query is not set.")
