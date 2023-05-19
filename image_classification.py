@@ -1,45 +1,35 @@
 import tensorflow as tf
+from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-# Définition des paramètres d'entraînement
-batch_size = 32
-epochs = 10
-image_height = 1024
-image_width = 1024
+def classification(train_dir, image_height, image_width, name_model_file):
+    # Chargez le modèle existant en format .h5
+    model = load_model(name_model_file)
 
-# Chemin vers les données d'entraînement
-train_data_dir = 'output_resize'
+    # Définir les paramètres d'entraînement
+    batch_size = 64
+    epochs = 50
 
-# Création du générateur d'images d'entraînement
-train_datagen = ImageDataGenerator(rescale=1.0/255.0)  # Rescale les valeurs des pixels entre 0 et 1
+    # Pré-traiter les images
+    train_datagen = ImageDataGenerator(rescale=1./255)
 
-train_generator = train_datagen.flow_from_directory(
-    train_data_dir,
-    target_size=(image_height, image_width),
-    batch_size=batch_size,
-    class_mode='binary'  # Classe binaire : 0 pour les têtes sans personne, 1 pour les têtes avec une personne
-)
+    # Charger les images d'entraînement
+    train_generator = train_datagen.flow_from_directory(
+            train_dir,
+            target_size=(image_height, image_width),
+            batch_size=batch_size,
+            class_mode='binary')
 
-# Création du modèle CNN
-model = tf.keras.models.Sequential([
-    tf.keras.layers.Conv2D(16, (3, 3), activation='relu', input_shape=(image_height, image_width, 3)),
-    tf.keras.layers.MaxPooling2D(2, 2),
-    tf.keras.layers.Conv2D(32, (3, 3), activation='relu'),
-    tf.keras.layers.MaxPooling2D(2, 2),
-    tf.keras.layers.Flatten(),
-    tf.keras.layers.Dense(64, activation='relu'),
-    tf.keras.layers.Dense(1, activation='sigmoid')  # Couche de sortie avec une seule unité pour la classification binaire
-])
+    # Compiler le modèle
+    model.compile(loss='binary_crossentropy',
+                optimizer=tf.keras.optimizers.RMSprop(lr=1e-4),
+                metrics=['acc'])
 
-# Compilation du modèle
-model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    # Entraîner le modèle
+    history = model.fit(
+        train_generator,
+        steps_per_epoch=train_generator.samples/train_generator.batch_size ,
+        epochs=epochs)
 
-# Entraînement du modèle
-model.fit(
-    train_generator,
-    steps_per_epoch=train_generator.samples // batch_size,
-    epochs=epochs
-)
-
-# Sauvegarde du modèle entraîné
-model.save('modele_classification_tetes.h5')
+    # Enregistrer le modèle entraîné
+    model.save(name_model_file)

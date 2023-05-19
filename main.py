@@ -2,6 +2,7 @@ import sys
 import os
 import crop_images
 import extract
+import image_classification
 from log import log
 sys.path.append('downloaders')
 import bing_search
@@ -9,6 +10,8 @@ import bing_search
 env_execute = os.environ.get('ENV_EXECUTE')
 
 query = os.environ.get('QUERY_SEARCH')
+
+name_model_file = "fap_model.h5"
 
 output_download_folder = "output_download"
 
@@ -31,5 +34,8 @@ if query is not None:
 
     log("-----Crop all images-----")
     crop_images.crop_images(query, output_download_folder, output_resize_folder, img_width, img_height)
+
+    log("-----Start image classification-----")
+    image_classification.classification(output_resize_folder, img_height, img_width, name_model_file)
 else:
     log("query is not set.")
