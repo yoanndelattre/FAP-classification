@@ -21,9 +21,7 @@ def classification(train_dir, image_height, image_width, name_model_file, new_na
             class_mode='binary')
 
     # Compiler le modèle
-    model.compile(loss='binary_crossentropy',
-                optimizer=tf.keras.optimizers.RMSprop(lr=1e-4),
-                metrics=['acc'])
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
     # Entraîner le modèle
     history = model.fit(
