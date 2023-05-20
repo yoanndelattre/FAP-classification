@@ -6,13 +6,14 @@ image_width = 1024
 
 # Création du modèle CNN
 model = tf.keras.models.Sequential([
-    tf.keras.layers.Conv2D(16, (3, 3), activation='relu', input_shape=(image_height, image_width, 3)),
-    tf.keras.layers.MaxPooling2D(2, 2),
-    tf.keras.layers.Conv2D(32, (3, 3), activation='relu'),
-    tf.keras.layers.MaxPooling2D(2, 2),
-    tf.keras.layers.Flatten(),
-    tf.keras.layers.Dense(64, activation='relu'),
-    tf.keras.layers.Dense(1, activation='sigmoid')  # Couche de sortie avec une seule unité pour la classification binaire
+    tf.keras.applications.MobileNetV2(
+        input_shape=(image_height, image_width, 3),  # Taille d'entrée du modèle
+        include_top=False,          # Ne pas inclure la couche fully connected à la sortie
+        weights='imagenet'          # Utiliser les poids pré-entraînés sur ImageNet
+    ),
+    tf.keras.layers.GlobalAveragePooling2D(),  # Réduction de dimension
+    tf.keras.layers.Dense(128, activation='relu'),  # Couche fully connected
+    tf.keras.layers.Dense(2, activation='softmax')  # Couche de sortie avec 2 classes (personne, non personne)
 ])
 
 # Compilation du modèle

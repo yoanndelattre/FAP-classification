@@ -24,10 +24,10 @@ def classification(train_dir, image_height, image_width, name_model_file, new_na
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
     # Train the model
-    history = model.fit(
+    model.fit(
         train_generator,
-        steps_per_epoch=train_generator.samples // batch_size,
-        epochs=epochs)
+        epochs=epochs
+    )
 
     # Save the trained model
     model.save(new_name_model_file)
