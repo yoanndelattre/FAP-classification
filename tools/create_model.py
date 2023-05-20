@@ -1,24 +1,8 @@
 import tensorflow as tf
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 # Définition des paramètres d'entraînement
-batch_size = 64
-epochs = 50
 image_height = 1024
 image_width = 1024
-
-# Chemin vers les données d'entraînement
-train_data_dir = 'download'
-
-# Création du générateur d'images d'entraînement
-train_datagen = ImageDataGenerator(rescale=1./255)  # Rescale les valeurs des pixels entre 0 et 1
-
-train_generator = train_datagen.flow_from_directory(
-    train_data_dir,
-    target_size=(image_height, image_width),
-    batch_size=batch_size,
-    class_mode='binary'  # Classe binaire : 0 pour les têtes sans personne, 1 pour les têtes avec une personne
-)
 
 # Création du modèle CNN
 model = tf.keras.models.Sequential([
@@ -34,12 +18,5 @@ model = tf.keras.models.Sequential([
 # Compilation du modèle
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-# Entraînement du modèle
-model.fit(
-    train_generator,
-    steps_per_epoch=train_generator.samples // batch_size,
-    epochs=epochs
-)
-
-# Sauvegarde du modèle entraîné
+# Sauvegarde du modèle
 model.save('fap_model.h5')
