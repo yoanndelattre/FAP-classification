@@ -7,7 +7,7 @@ def classification(train_dir, image_height, image_width, name_model_file, new_na
     model = load_model(name_model_file)
 
     # Define training parameters
-    batch_size = 64
+    batch_size = 32
     epochs = 50
 
     # Preprocess the images
