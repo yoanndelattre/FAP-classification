@@ -3,31 +3,31 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 def classification(train_dir, image_height, image_width, name_model_file, new_name_model_file):
-    # Chargez le modèle existant en format .h5
+    # Load the existing model in .h5 format
     model = load_model(name_model_file)
 
-    # Définir les paramètres d'entraînement
+    # Define training parameters
     batch_size = 64
     epochs = 50
 
-    # Pré-traiter les images
-    train_datagen = ImageDataGenerator(rescale=1./255)
+    # Preprocess the images
+    train_datagen = ImageDataGenerator(rescale=1.0/255)
 
-    # Charger les images d'entraînement
+    # Load the training images
     train_generator = train_datagen.flow_from_directory(
             train_dir,
             target_size=(image_height, image_width),
             batch_size=batch_size,
-            class_mode='binary')
+            class_mode='categorical')
 
-    # Compiler le modèle
+    # Compile the model
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-    # Entraîner le modèle
+    # Train the model
     history = model.fit(
         train_generator,
-        steps_per_epoch=train_generator.samples/train_generator.batch_size ,
+        steps_per_epoch=train_generator.samples // batch_size,
         epochs=epochs)
 
-    # Enregistrer le modèle entraîné
+    # Save the trained model
     model.save(new_name_model_file)
