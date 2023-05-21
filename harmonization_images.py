@@ -3,6 +3,33 @@ import os
 from log import log
 import shutil
 
+def resize_images(query, input_folder, output_folder, width, height):
+    input_subfolder = os.path.join(input_folder, query)
+    output_subfolder = os.path.join(output_folder, query)
+
+    # Create the output folder if it doesn't exist
+    if not os.path.exists(output_subfolder):
+        os.makedirs(output_subfolder)
+
+    # Get the list of files in the input folder
+    files = os.listdir(input_subfolder)
+
+    for filename in files:
+        input_path = os.path.join(input_subfolder, filename)
+        output_path = os.path.join(output_subfolder, filename)
+            
+        original_image = Image.open(input_path)
+        resized_image = original_image.resize((width, height))
+        resized_image.save(output_path)
+
+        msg_log = output_path + " is now resized"
+        log(msg_log)
+
+    # Delete the source folder
+    shutil.rmtree(input_folder)
+    msg_log = "Data has been moved -> " + output_folder
+    log(msg_log)
+
 def crop_images(query, input_folder, output_folder, width, height):
     input_subfolder = os.path.join(input_folder, query)
     output_subfolder = os.path.join(output_folder, query)

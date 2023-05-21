@@ -1,6 +1,6 @@
 import sys
 import os
-import crop_images
+import harmonization_images
 import extract
 import image_classification
 from log import log
@@ -23,6 +23,7 @@ if env_execute == "PROD":
 else:
     limit_browser = 5
 
+output_crop_folder = "output_crop"
 output_resize_folder = "output_resize"
 img_width = 1024
 img_height = 1024
@@ -34,7 +35,10 @@ if query is not None:
     extract.move_and_delete_tmp_folder(bing_tmp_folder, output_download_folder, query)
 
     log("-----Crop all images-----")
-    crop_images.crop_images(query, output_download_folder, output_resize_folder, img_width, img_height)
+    harmonization_images.crop_images(query, output_download_folder, output_crop_folder, img_width, img_height)
+
+    log("-----Resize all images-----")
+    harmonization_images.resize_images(query, output_crop_folder, output_resize_folder, width, height)
 
     log("-----Start image classification-----")
     image_classification.classification(output_resize_folder, img_height, img_width, name_model_file, new_name_model_file)

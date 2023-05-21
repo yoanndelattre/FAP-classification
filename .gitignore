@@ -1,5 +1,6 @@
 output_download/
 output_resize/
+output_crop/
 *tmp*
 __pycache__
 *.h5
