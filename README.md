@@ -39,7 +39,7 @@ epochs = 50
 ```
 
 ### Duration of execution
-The execution time of the image download and model training tasks is 32mins 14secs.
+The execution time of the image download and model training tasks is 32mins 14secs.  
 The execution time of the server (from its start to its shutdown) is 35mins.
 
 ### Price of the execution
