@@ -2,9 +2,6 @@
 ## FAP-classification retrieving training images from various online sources. These training images will train the FAP recognition data model.
 <br>
 
----
-<br>
-
 ## __Performance test__
 
 ### *Description of the test configuration*  
@@ -41,5 +38,5 @@ batch_size = 32
 epochs = 50
 ```
 
-## Duration of execution
-### The execution time of the image download and model training tasks is 32mins 14 secs.
+### Duration of execution
+The execution time of the image download and model training tasks is 32mins 14 secs.
