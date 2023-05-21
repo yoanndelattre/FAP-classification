@@ -1,23 +1,23 @@
 import tensorflow as tf
 
-# Définition des paramètres d'entraînement
+# Training parameters definition
 image_height = 512
 image_width = 512
 
-# Création du modèle CNN
+# Create the CNN model
 model = tf.keras.models.Sequential([
     tf.keras.applications.MobileNetV2(
-        input_shape=(image_height, image_width, 3),  # Taille d'entrée du modèle
-        include_top=False,          # Ne pas inclure la couche fully connected à la sortie
-        weights='imagenet'          # Utiliser les poids pré-entraînés sur ImageNet
+        input_shape=(image_height, image_width, 3),  # Input size of the model
+        include_top=False,          # Exclude the fully connected layer at the output
+        weights='imagenet'          # Use pre-trained weights from ImageNet
     ),
-    tf.keras.layers.GlobalAveragePooling2D(),  # Réduction de dimension
-    tf.keras.layers.Dense(128, activation='relu'),  # Couche fully connected
-    tf.keras.layers.Dense(2, activation='softmax')  # Couche de sortie avec 2 classes (personne, non personne)
+    tf.keras.layers.GlobalAveragePooling2D(),  # Dimension reduction
+    tf.keras.layers.Dense(128, activation='relu'),  # Fully connected layer
+    tf.keras.layers.Dense(2, activation='softmax')  # Output layer with 2 classes (person, non-person)
 ])
 
-# Compilation du modèle
+# Compile the model
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-# Sauvegarde du modèle
+# Save the model
 model.save('fap_model.h5')
