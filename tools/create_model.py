@@ -1,8 +1,8 @@
 import tensorflow as tf
 
 # Définition des paramètres d'entraînement
-image_height = 1024
-image_width = 1024
+image_height = 512
+image_width = 512
 
 # Création du modèle CNN
 model = tf.keras.models.Sequential([
