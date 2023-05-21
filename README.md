@@ -40,3 +40,8 @@ epochs = 50
 
 ### Duration of execution
 The execution time of the image download and model training tasks is 32mins 14 secs.
+
+### Price of the execution of the task
+*The price includes the hourly cost of server rental for CPU, RAM, storage type and storage space.*  
+The hourly cost is **0.11 $US**.  
+The cost of performing the task is approximately **0.06 $US**.
