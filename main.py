@@ -24,9 +24,12 @@ else:
     limit_browser = 5
 
 output_crop_folder = "output_crop"
+img_width_crop = 1024
+img_height_crop = 1024
+
 output_resize_folder = "output_resize"
-img_width = 1024
-img_height = 1024
+img_width_resize = 512
+img_height_resize = 512
 
 if query is not None:
     log("-----Download Bing Image-----")
@@ -35,12 +38,12 @@ if query is not None:
     extract.move_and_delete_tmp_folder(bing_tmp_folder, output_download_folder, query)
 
     log("-----Crop all images-----")
-    harmonization_images.crop_images(query, output_download_folder, output_crop_folder, img_width, img_height)
+    harmonization_images.crop_images(query, output_download_folder, output_crop_folder, img_width_crop, img_height_crop)
 
     log("-----Resize all images-----")
-    harmonization_images.resize_images(query, output_crop_folder, output_resize_folder, width, height)
+    harmonization_images.resize_images(query, output_crop_folder, output_resize_folder, img_width_resize, img_height_resize)
 
     log("-----Start image classification-----")
-    image_classification.classification(output_resize_folder, img_height, img_width, name_model_file, new_name_model_file)
+    image_classification.classification(output_resize_folder, img_height_resize, img_width_resize, name_model_file, new_name_model_file)
 else:
     log("query is not set.")
