@@ -21,7 +21,7 @@ def classification(train_dir, image_height, image_width, name_model_file, new_na
             class_mode='categorical')
 
     # Compile the model
-    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
     # Train the model
     model.fit(

@@ -17,7 +17,7 @@ model = tf.keras.models.Sequential([
 ])
 
 # Compile the model
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 # Save the model
 model.save('fap_model.h5')
