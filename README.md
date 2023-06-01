@@ -4,4 +4,4 @@
 
 ## __Benchmarks__
 
-[Benchmark 1](/guides/content/editing-an-existing-page)
+[Benchmark 1](benchmarks/benchmark1.md)
